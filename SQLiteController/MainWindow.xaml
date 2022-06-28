@@ -1,0 +1,85 @@
+﻿<Window x:Class="SQLiteController.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SQLiteController"
+        Height="400" Width="520"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Height="20"
+                    Margin="20"
+                    Orientation="Horizontal">
+            <TextBlock
+                FontWeight="Bold"
+                Text="База данных" />
+
+            <TextBox Width="270"
+                     Margin="20 0"
+                     IsReadOnly="True"
+                     x:Name="DataBaseDirectoryTextBox"/>
+            <Button Width="60"
+                    Content="Выбрать"
+                    Click="SelectDataBaseButtonClick"/>
+        </StackPanel>
+
+        <Separator Grid.Row="1" />
+
+        <StackPanel Grid.Row="2"
+                    Margin="20"
+                    Orientation="Horizontal">
+            <StackPanel Width="70">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Таблица" />
+                <TextBlock HorizontalAlignment="Center"
+                           Text="Не выбрано"
+                           x:Name="ExportTableLabel"/>
+            </StackPanel>
+
+            <ScrollViewer Height="80" Width="80"
+                          Margin="20 0">
+                <ListBox HorizontalContentAlignment="Center"
+                         x:Name="ExportTableListBox"
+                         SelectionChanged="ExportTableListBoxSelected">
+                </ListBox>
+            </ScrollViewer>
+
+            <StackPanel Width="70">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Столбец" />
+                <TextBlock HorizontalAlignment="Center"
+                           Text="Не выбрано" 
+                           x:Name="ExportColumnLabel"/>
+            </StackPanel>
+
+            <ScrollViewer Height="80" Width="80"
+                          Margin="20 0">
+                <ListBox HorizontalContentAlignment="Center"
+                         x:Name="ExportColumnListBox"
+                         SelectionChanged="ExportColumnListBoxSelected">
+                </ListBox>
+            </ScrollViewer>
+            
+            <Button Width="70" Height="20"
+                    VerticalAlignment="Bottom"
+                    Content="Выгрузить"
+                    Click="ExportButtonClick"/>
+        </StackPanel>
+
+        <Separator Grid.Row="3" />
+    </Grid>
+</Window>
