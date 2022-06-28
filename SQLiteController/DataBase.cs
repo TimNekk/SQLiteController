@@ -19,7 +19,7 @@ namespace SQLiteController
         }
 
         // Get all available tables names from database
-        public IEnumerable<string> GetTablesNames()
+        public ICollection<string> GetTablesNames()
         {
             var tables = new List<string>();
             var command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table'", _connection);
@@ -35,7 +35,7 @@ namespace SQLiteController
         }
 
         // Get all available columns names from table
-        public IEnumerable<string> GetColumnsNames(string tableName)
+        public ICollection<string> GetColumnsNames(string tableName)
         {
             var columns = new List<string>();
             var command = new SQLiteCommand($"PRAGMA table_info({tableName})", _connection);
@@ -48,16 +48,36 @@ namespace SQLiteController
         }
         
         // Get all available values from column
-        public IEnumerable<object> GetData(string tableName, string columnName)
+        public ICollection<string> GetData(string tableName, string columnName)
         {
-            var data = new List<object>();
+            var data = new List<string>();
             var command = new SQLiteCommand($"SELECT {columnName} FROM {tableName}", _connection);
             var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                data.Add(reader.GetValue(0));
+                data.Add(reader.GetValue(0).ToString());
             }
             return data;
+        }
+        
+        // Change value if other value equal to new value
+        public void CheckAndChangeValues(
+            string tableName, 
+            string checkColumnName, 
+            string editColumnName, 
+            string valueIfContains, 
+            string valueIfNotContains,
+            IEnumerable<string> checkValues)
+        {
+            var joinedCheckValues = string.Join(",", checkValues);
+            var commandIfContains = new SQLiteCommand(
+                $"UPDATE {tableName} SET {editColumnName} = '{valueIfContains}' WHERE {checkColumnName} IN ({joinedCheckValues})",
+                _connection);
+            var commandIfNotContains = new SQLiteCommand(
+                $"UPDATE {tableName} SET {editColumnName} = '{valueIfNotContains}' WHERE {checkColumnName} NOT IN ({joinedCheckValues})",
+                _connection);
+            commandIfContains.ExecuteNonQuery();
+            commandIfNotContains.ExecuteNonQuery();
         }
     }
 }
