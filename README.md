@@ -7,3 +7,4 @@
 ## Features
 
 - Export all data from column 
+- Set data from file to column with filter
