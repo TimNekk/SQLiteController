@@ -1,5 +1,9 @@
-<h1 style="text-align: center">SQLiteController</h1>
+<div align="center">
+  <h1>SQLiteController</h1>
+  <p>Export and Import data to SQLite DB</p>
+  <img alt="Preview" src="preview.png">
+</div>
 
-<p style="text-align: center">Export and Import data to SQLite DB</p>
+## Features
 
-<img alt="Preview" src="preview.png" style="align-content: center">
+- Export all data from column 
