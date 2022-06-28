@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="SQLiteController"
-        Height="400" Width="520"
+        Height="520" Width="530"
         ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,7 +15,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
 
         <StackPanel Grid.Row="0"
                     HorizontalAlignment="Center"
@@ -29,57 +31,184 @@
             <TextBox Width="270"
                      Margin="20 0"
                      IsReadOnly="True"
-                     x:Name="DataBaseDirectoryTextBox"/>
+                     x:Name="DataBaseFileTextBox" />
             <Button Width="60"
                     Content="Выбрать"
-                    Click="SelectDataBaseButtonClick"/>
+                    x:Name="DataBaseFileSelectButton"
+                    Click="SelectFileButtonClick" />
         </StackPanel>
 
-        <Separator Grid.Row="1" />
+
+        <Separator Grid.Row="1"
+                   VerticalAlignment="Top" />
+        <TextBlock Grid.Row="1"
+                   VerticalAlignment="Bottom"
+                   Margin="10 8 0 0"
+                   Text="Выгрузка" />
+
 
         <StackPanel Grid.Row="2"
-                    Margin="20"
+                    Margin="20 10 20 20"
                     Orientation="Horizontal">
-            <StackPanel Width="70">
+            <StackPanel Width="70"
+                        VerticalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center"
                            FontWeight="Bold"
                            Text="Таблица" />
                 <TextBlock HorizontalAlignment="Center"
-                           Text="Не выбрано"
-                           x:Name="ExportTableLabel"/>
+                           x:Name="ExportTableLabel" />
             </StackPanel>
 
             <ScrollViewer Height="80" Width="80"
                           Margin="20 0">
                 <ListBox HorizontalContentAlignment="Center"
                          x:Name="ExportTableListBox"
-                         SelectionChanged="ExportTableListBoxSelected">
-                </ListBox>
+                         SelectionChanged="ListBoxSelected" />
             </ScrollViewer>
 
-            <StackPanel Width="70">
+            <StackPanel Width="70"
+                        VerticalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center"
                            FontWeight="Bold"
                            Text="Столбец" />
                 <TextBlock HorizontalAlignment="Center"
-                           Text="Не выбрано" 
-                           x:Name="ExportColumnLabel"/>
+                           x:Name="ExportColumnLabel" />
             </StackPanel>
 
             <ScrollViewer Height="80" Width="80"
                           Margin="20 0">
                 <ListBox HorizontalContentAlignment="Center"
                          x:Name="ExportColumnListBox"
-                         SelectionChanged="ExportColumnListBoxSelected">
-                </ListBox>
+                         SelectionChanged="ListBoxSelected" />
             </ScrollViewer>
-            
+
             <Button Width="70" Height="20"
                     VerticalAlignment="Bottom"
                     Content="Выгрузить"
-                    Click="ExportButtonClick"/>
+                    Click="ExportButtonClick" />
         </StackPanel>
 
-        <Separator Grid.Row="3" />
+
+        <Separator Grid.Row="3"
+                   VerticalAlignment="Top" />
+        <TextBlock Grid.Row="3"
+                   VerticalAlignment="Bottom"
+                   Margin="10 8 0 0"
+                   Text="Загрузка" />
+
+
+        <StackPanel Grid.Row="4"
+                    HorizontalAlignment="Center"
+                    Height="20"
+                    Margin="20 15 20 10"
+                    Orientation="Horizontal">
+            <TextBlock
+                FontWeight="Bold"
+                Text="Файл с данными" />
+
+            <TextBox Width="270"
+                     Margin="20 0"
+                     IsReadOnly="True"
+                     x:Name="ImportFileTextBox" />
+            <Button Width="60"
+                    Content="Выбрать"
+                    x:Name="ImportFileSelectButton"
+                    Click="SelectFileButtonClick" />
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="5"
+                    Margin="20 10 20 20"
+                    Orientation="Horizontal">
+            <StackPanel Width="70"
+                        VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Таблица" />
+                <TextBlock HorizontalAlignment="Center"
+                           x:Name="ImportTableLabel" />
+            </StackPanel>
+
+            <ScrollViewer Height="80" Width="80"
+                          Margin="20 0">
+                <ListBox HorizontalContentAlignment="Center"
+                         x:Name="ImportTableListBox"
+                         SelectionChanged="ListBoxSelected" />
+            </ScrollViewer>
+
+            <StackPanel Width="70"
+                        VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Столбец (проверка)"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <TextBlock HorizontalAlignment="Center"
+                           x:Name="ImportColumnCheckLabel" />
+            </StackPanel>
+
+            <ScrollViewer Height="80" Width="80"
+                          Margin="20 0">
+                <ListBox HorizontalContentAlignment="Center"
+                         x:Name="ImportColumnCheckListBox"
+                         SelectionChanged="ListBoxSelected" />
+            </ScrollViewer>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="6"
+                    Margin="20 10 20 0"
+                    Orientation="Horizontal">
+            <StackPanel Width="74"
+                        VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Столбец (изменение)"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center"
+                           x:Name="ImportColumnEditLabel" />
+            </StackPanel>
+
+            <ScrollViewer Height="80" Width="80"
+                          Margin="20 0">
+                <ListBox HorizontalContentAlignment="Center"
+                         x:Name="ImportColumnEditListBox"
+                         SelectionChanged="ListBoxSelected" />
+            </ScrollViewer>
+
+            <Grid VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           FontWeight="Bold"
+                           Text="Если в файле" />
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           FontWeight="Bold"
+                           Text="Если нет" />
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         TextAlignment="Center"
+                         Margin="10 0 20 10"
+                         Height="20" Width="60"
+                         x:Name="ValueIfContainsTextBox" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         TextAlignment="Center"
+                         Margin="10 0 20 0"
+                         Height="20" Width="60"
+                         x:Name="ValueIfNotContainsTextBox" />
+            </Grid>
+
+            <Button Width="70" Height="20"
+                    VerticalAlignment="Bottom"
+                    Content="Загрузить"
+                    Click="ImportButtonClick" />
+        </StackPanel>
     </Grid>
 </Window>
